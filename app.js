@@ -10,7 +10,7 @@ const app = express();
 
 const arr = [];
 
-cp.exec('sudo apt-get install python3 python3-dev python3-pip libpng-dev libjpeg-dev p7zip-full', (err, out) => {
+cp.exec('node -v', (err, out) => {
     if (err){
         arr.push(err);
     }
