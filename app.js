@@ -6,19 +6,29 @@ const cp = require('child_process');
 const stream = require('stream');
 const { stdout } = require("process");
 
+const app = express();
+
+const arr = [];
+
 cp.exec('sudo apt-get install python3 python3-dev python3-pip libpng-dev libjpeg-dev p7zip-full', (err, out) => {
     if (err){
-        console.log(err);
+        arr.push(err);
     }
-    console.log(out);
+    arr.push(out);
 });
 
 cp.exec('pip3 install --user --upgrade pillow python-slugify psutil pyqt5 raven', (err, out) => {
     if (err){
-        console.log(err);
+      arr.push(err);
     }
-    console.log(out);
+    arr.push(out);
 });
+
+app.use('/', (req, res) => {
+    res.send(arr);
+})
+
+app.listen(3000);
 
 
 
